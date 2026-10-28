@@ -1,0 +1,107 @@
+<div class="w-full overflow-hidden rounded-lg border-gray-200 bg-white">
+
+    <!-- Table Title -->
+    <div class="border-b border-gray-200 px-4 py-3 flex justify-between">
+        <div>
+            <h2 class="text-lg font-semibold text-gray-800">Excel Data</h2>
+            <p class="text-sm text-gray-500">
+                Total {{ datas.length }} records
+            </p>
+        </div>
+
+        <button type="button" (click)="exportToExcel()"
+            class="inline-flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 16.5V3.75m0 12.75 4.5-4.5M12 16.5l-4.5-4.5M3.75 16.5v2.625c0 .621.504 1.125 1.125 1.125h14.25c.621 0 1.125-.504 1.125-1.125V16.5" />
+            </svg>
+
+            Export Excel
+            <span class="rounded bg-green-700 px-2 py-0.5 text-xs">
+                {{ rowDisplaies.length }}
+            </span>
+        </button>
+    </div>
+
+    <!-- Scrollable Table -->
+    <div class="max-h-150 w-full overflow-auto">
+        <table class="min-w-max border-collapse text-left text-sm">
+
+            <!-- Table Header -->
+            <thead class="sticky top-0 z-10 bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-3">Job I</th>
+                    <th class="border px-4 py-3">ETA</th>
+                    <th class="border px-4 py-3">ATA</th>
+                    <th class="border px-4 py-3">Invoice No.</th>
+                    <th class="border px-4 py-3">Origin Port</th>
+                    <th class="border px-4 py-3">Release Port</th>
+                    <th class="border px-4 py-3">Carrier Name</th>
+                    <th class="border px-4 py-3">Container No.</th>
+                    <th class="border px-4 py-3">Container Count</th>
+                    <th class="border px-4 py-3">Seal</th>
+                    <th class="border px-4 py-3">Container Size</th>
+                    <th class="border px-4 py-3">Cartons</th>
+                    <th class="border px-4 py-3">CBM</th>
+                    <th class="border px-4 py-3">File Name Date</th>
+                    <th class="border px-4 py-3">DO Release</th>
+                    <th class="border px-4 py-3">Shipping Document Receive</th>
+                    <th class="border px-4 py-3">Shipping Document Issue</th>
+                    <th class="border px-4 py-3">Shipping Document Complete</th>
+                    <th class="border px-4 py-3">Status Declaration</th>
+                    <th class="border px-4 py-3">Customs Release Import</th>
+                    <th class="border px-4 py-3">Delivery Plan</th>
+                    <th class="border px-4 py-3">Import Declaration Release</th>
+                    <th class="border px-4 py-3">Delivery Date Custom</th>
+                    <th class="border px-4 py-3">Delivery Place</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                @for (row of rowDisplaies; track $index) {
+                <tr class="hover:bg-blue-50">
+
+                    <td class="border px-4 py-3">{{ row.jobI ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.eta ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.ata ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.invoiceNo ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.originPortName ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.releasePort ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.carrierName ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.ctnrNo ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.ctnrNoCount ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.seal ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.containerSize ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.cartons ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.cbm ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.fileNameDate ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.doRelease ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.shippingDocumentReceive ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.shippingDocumentIssue ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.shippingDocumentComplete ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.statusDeclaration ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.customsReleaseImport ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.deliveryPlane ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.importDeclerationRelease ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.deliveryDateCustom ?? '-' }}</td>
+                    <td class="border px-4 py-3">{{ row.DeliceryPlace ?? '-' }}</td>
+
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="24" class="px-4 py-8 text-center text-gray-500">
+                        No data available
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<app-shipment-dashboard
+  [datas]="rowDisplaies"
+/>

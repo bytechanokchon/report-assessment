@@ -1,0 +1,105 @@
+
+<div class="space-y-6">
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+    <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <p class="text-sm font-medium text-gray-500">
+        Total Shipments
+      </p>
+      <p class="mt-2 text-3xl font-bold text-blue-600">
+        {{ totalShipments | number }}
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        จำนวนรายการนำเข้าทั้งหมด
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <p class="text-sm font-medium text-gray-500">
+        Total Cartons
+      </p>
+      <p class="mt-2 text-3xl font-bold text-emerald-600">
+        {{ totalCartons | number }}
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        จำนวนกล่องสินค้าทั้งหมด
+      </p>
+    </div>
+
+    <div class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <p class="text-sm font-medium text-gray-500">
+        Total CBM
+      </p>
+      <p class="mt-2 text-3xl font-bold text-violet-600">
+        {{ totalCbm | number:'1.2-2' }}
+      </p>
+      <p class="mt-1 text-sm text-gray-400">
+        ปริมาตรสินค้ารวม
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Carrier & Container Charts -->
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+    <section class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Shipments by Carrier
+      </h2>
+      <p class="mb-5 mt-1 text-sm text-gray-500">
+        จำนวน Shipment แยกตามบริษัทขนส่ง
+      </p>
+
+      <div class="relative h-72">
+        <canvas
+          baseChart
+          [type]="'bar'"
+          [data]="carrierChartData"
+          [options]="barOptions"
+        ></canvas>
+      </div>
+    </section>
+
+    <section class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+      <h2 class="text-lg font-semibold text-gray-800">
+        Container Size Distribution
+      </h2>
+      <p class="mb-5 mt-1 text-sm text-gray-500">
+        สัดส่วนประเภทตู้คอนเทนเนอร์
+      </p>
+
+      <div class="relative h-72">
+        <canvas
+          baseChart
+          [type]="'doughnut'"
+          [data]="containerChartData"
+          [options]="doughnutOptions"
+        ></canvas>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Origin Port Chart -->
+  <section class="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+    <h2 class="text-lg font-semibold text-gray-800">
+      Cartons by Origin Port
+    </h2>
+    <p class="mb-5 mt-1 text-sm text-gray-500">
+      ปริมาณกล่องสินค้าจาก 8 ท่าเรือต้นทางที่มีปริมาณสูงสุด
+    </p>
+
+    <div class="relative h-80">
+      <canvas
+        baseChart
+        [type]="'bar'"
+        [data]="originChartData"
+        [options]="barOptions"
+      ></canvas>
+    </div>
+  </section>
+
+</div>

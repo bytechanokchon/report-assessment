@@ -1,0 +1,51 @@
+<section>
+    <div class="mt-10 mx-10 mb-5">
+        <label for="excelFile" class="px-4 py-2 rounded bg-green-800 cursor-pointer transition hover:bg-green-600 text-white">เลือกไฟล์</label>
+        <input 
+            class="hidden"
+            type="file" 
+            id="excelFile" 
+            accept=".xlsx, .xls" 
+            (change)="onFileSelected($event)" />
+    </div>
+    <div class="">
+        <div class="mx-10">
+            @if (excelData.length > 0) {
+            <div>
+                <div class="mb-5 w-full">
+                    <label for="filter" class="mb-2 block text-sm font-semibold text-gray-700">
+                        ค้นหาข้อมูล Excel
+                    </label>
+
+                    <div class="relative w-full max-w-xl">
+                        <!-- Search Icon -->
+                        <div class="pointer-events-none absolute inset-y-0 left-0
+             flex items-center pl-3.5">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="11" cy="11" r="7" />
+                                <path stroke-linecap="round" d="m16 16 4 4" />
+                            </svg>
+                        </div>
+
+                        <!-- Filter Input -->
+                        <input type="text" id="filter" placeholder="ค้นหา Job I, Invoice No., Carrier..."
+                            (input)="onChangeFilterText($event)" class="block w-full rounded-xl border border-gray-300
+             bg-white py-3 pl-11 pr-4 text-sm text-gray-900
+             placeholder:text-gray-400 shadow-sm
+             transition duration-200
+             hover:border-gray-400
+             focus:border-blue-500 focus:outline-none
+             focus:ring-4 focus:ring-blue-100" />
+                    </div>
+
+                    <p class="mt-2 text-xs text-gray-500">
+                        ค้นหาได้จากทุกคอลัมน์ในตาราง
+                    </p>
+                </div>
+                <app-excel-table [datas]="excelData" [filterWord]="filterWord" />
+            </div>
+            }
+        </div>
+    </div>
+</section>
